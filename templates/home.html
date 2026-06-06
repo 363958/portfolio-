@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- HERO -->
+<section id="home" class="hero reveal">
+
+    <div class="hero-content">
+
+        <h1>Hi, I'm <span>Kripa Poudel</span></h1>
+
+        <!-- FIXED: not empty -->
+        <h2>Cloud & QA Enthusiast</h2>
+
+        <p>
+            IT Student passionate about Cloud Computing,
+            Software Testing, and Full Stack Web Development.
+        </p>
+
+        <a href="#contact" class="btn">Contact Me</a>
+
+    </div>
+
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section reveal-left">
+
+    <h2>About Me</h2>
+
+    <p>
+        I am an IT student focused on Cloud Computing,
+        QA Engineering, and Django development.
+    </p>
+
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="section skills reveal">
+
+    <h2>Skills</h2>
+
+    <div class="skills-grid">
+        <span>Python</span>
+        <span>Django</span>
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JavaScript</span>
+        <span>MySQL</span>
+        <span>Cloud</span>
+        <span>QA Testing</span>
+    </div>
+
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section projects reveal-right">
+
+    <h2>Projects</h2>
+
+    <div class="project-grid">
+
+        <div class="project-card">
+            <h3>Blood Donation System</h3>
+            <p>Django-based blood bank management system.</p>
+        </div>
+
+        <div class="project-card">
+            <h3>Service Marketplace</h3>
+            <p>React Native + Django platform.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section contact reveal">
+
+    <h2>Contact Me</h2>
+
+    <form class="contactForm" method="POST">
+    {% csrf_token %}
+
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message" required></textarea>
+
+    <button type="submit">Send Message</button>
+</form>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer class="reveal">
+
+    <p>© 2026 Kripa Poudel | Built with Django</p>
+
+</footer>
+
+<!-- WHATSAPP -->
+<a class="whatsapp" href="https://wa.me/9779843677123" target="_blank">
+    💬
+</a>
+
+
+
+<div id="popup" class="popup">
+    ✅ Message sent successfully!
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- smooth scroll -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= PARTICLE BACKGROUND ================= -->
+<canvas id="particleCanvas"></canvas>
+
+<!-- ================= SCROLL PROGRESS BAR ================= -->
+<div id="progressBar"></div>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+
+    <div class="logo">
+        Kripa<span>Poudel</span>
+    </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <ul class="nav-links" id="navLinks">
+
+        <li><a class="nav-link" href="#home">Home</a></li>
+        <li><a class="nav-link" href="#about">About</a></li>
+        <li><a class="nav-link" href="#skills">Skills</a></li>
+        <li><a class="nav-link" href="#projects">Projects</a></li>
+        <li><a class="nav-link" href="#contact">Contact</a></li>
+
+        <li>
+            <button onclick="toggleTheme()" class="theme-btn">🌙</button>
+        </li>
+
+        <li>
+            <a href="{% static 'cv.pdf' %}" download class="cv-btn">CV</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+<!-- ================= PAGE CONTENT ================= -->
+{% block content %}
+{% endblock %}
+
+<!-- ================= POPUP (IMPORTANT FIX) ================= -->
+<div id="popup" class="popup">
+    Message Sent Successfully ✅
+</div>
+
+<!-- ================= JS ================= -->
+<script src="{% static 'js/main.js' %}"></script>
+
+<!-- ================= PROGRESS BAR SCRIPT ================= -->
+<script>
+window.addEventListener("scroll", () => {
+    let scrollTop = document.documentElement.scrollTop;
+    let scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    let scrolled = (scrollTop / scrollHeight) * 100;
+
+    const bar = document.getElementById("progressBar");
+    if (bar) {
+        bar.style.width = scrolled + "%";
+    }
+});
+</script>
+
+<!-- ================= WHATSAPP FLOAT BUTTON ================= -->
+<a href="https://wa.me/9779843677123" class="whatsapp" target="_blank">
+    💬
+</a>
+
+</body>
+</html>
