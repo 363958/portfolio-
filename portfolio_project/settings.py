@@ -4,6 +4,8 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 SECRET_KEY = 'django-insecure-+zvx-pkq1*@gsk1!z*xorz^i95d!1htwce^uh^9mot2v#)!06d'
 

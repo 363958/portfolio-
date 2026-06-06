@@ -3,7 +3,16 @@
 
 {% block content %}
 
-<!-- HERO -->
+<!-- HERO -->{% if cv %}
+    <a href="{{ cv.file.url }}" class="btn" download target="_blank">
+        Download CV
+    </a>
+{% else %}
+    <a href="#" class="btn" onclick="alert('No CV uploaded yet')">
+        Download CV
+    </a>
+{% endif %}
+
 <section id="home" class="hero">
 
     <div class="hero-content">
