@@ -97,6 +97,13 @@ body {
     align-items: center;
 }
 
+.navbar.scrolled {
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+
 /* LINKS */
 .nav-links li a {
     text-decoration: none;
@@ -115,30 +122,29 @@ body {
 }
 
 /* BUTTONS */
-.theme-btn,
-.cv-btn {
-    padding: 10px 18px;
-    border-radius: 10px;
-
-    border: none;
-    cursor: pointer;
-
+/* ================= NAV BUTTON BASE ================= */
+.theme-btn{
     background: rgba(255,255,255,0.08);
     color: white;
-
-    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+.cv-btn {
+    background: linear-gradient(90deg, #22c55e, #38bdf8);
+    color: #0f172a;
+    font-weight: bold;
+    box-shadow: 0 8px 20px rgba(34,197,94,0.25);
 }
 
-.theme-btn:hover,
 .cv-btn:hover {
-    transform: translateY(-4px) scale(1.05);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(56,189,248,0.35);
+}
 
+.theme-btn:hover {
     background: rgba(56, 189, 248, 0.15);
-    border: 1px solid rgba(56, 189, 248, 0.5);
-
+    border-color: #38bdf8;
     color: #38bdf8;
-
-    box-shadow: 0 8px 20px rgba(56, 189, 248, 0.25);
+    transform: rotate(10deg) scale(1.1);
 }
 
 /* MOBILE */
@@ -344,18 +350,21 @@ footer {
 }
 
 /* ================= LIGHT MODE ================= */
-body.light-mode {
-    background: #f1f5f9;
+body.light-mode .nav-links li a {
     color: #0f172a;
 }
 
-body.light-mode .navbar {
-    background: rgba(255,255,255,0.8);
+body.light-mode .nav-links li a:hover {
+    background: rgba(56, 189, 248, 0.15);
 }
 
-body.light-mode .project-card {
-    background: white;
-    color: black;
+body.light-mode .theme-btn {
+    background: rgba(0,0,0,0.05);
+    color: #0f172a;
+}
+
+body.light-mode .cv-btn {
+    color: white;
 }
 
 body.light-mode .skills-grid span {
