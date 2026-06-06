@@ -4,11 +4,11 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# ================= MEDIA =================
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-import os
-
+# ================= SECURITY =================
 SECRET_KEY = os.environ.get("SECRET_KEY", "dev-key")
 DEBUG = False
 
@@ -18,7 +18,7 @@ ALLOWED_HOSTS = [
     ".onrender.com"
 ]
 
-
+# ================= APPS =================
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -30,9 +30,13 @@ INSTALLED_APPS = [
     'portfolio',
 ]
 
+# ================= MIDDLEWARE =================
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+
+    # MUST be directly after SecurityMiddleware
     'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -43,6 +47,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'portfolio_project.urls'
 
+# ================= TEMPLATES =================
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -60,8 +65,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'portfolio_project.wsgi.application'
 
-
-# DATABASE
+# ================= DATABASE =================
 DATABASES = {
     'default': dj_database_url.config(
         default='sqlite:///db.sqlite3',
@@ -70,7 +74,7 @@ DATABASES = {
     )
 }
 
-
+# ================= AUTH =================
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -78,33 +82,33 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-
+# ================= INTERNATIONAL =================
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
-
 
 # ================= STATIC FILES (FIXED) =================
 STATIC_URL = "/static/"
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static"
-]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
 
-# ================= EMAIL (UNCHANGED) =================
+# ================= EMAIL (FIXED SECURITY) =================
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = 'kripapdl12@gmail.com'
-EMAIL_HOST_PASSWORD = 'bmmp qsta heco fquu'
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
