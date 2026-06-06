@@ -205,41 +205,109 @@ background: var(--navbar-bg);
     align-items: center;
     text-align: center;
     padding: 0 20px;
-     color: var(--muted-text);
+
+    /* FIX: use theme system instead of fixed color */
+    color: var(--text-color);
+
+    overflow: hidden;
 }
 
+/* ================= HERO ANIMATED ELEMENTS ================= */
+.hero h1,
+.hero h2,
+.hero p,
+.hero .btn {
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    will-change: transform, opacity;
+}
+
+/* ================= TITLE ================= */
 .hero h1 {
     font-size: 52px;
+    color: var(--text-color);
 }
 
 .hero h1 span {
     color: #22c55e;
 }
 
+/* ================= SUBTITLE ================= */
 .hero h2 {
     color: #38bdf8;
     margin-top: 10px;
 }
 
+/* ================= PARAGRAPH ================= */
 .hero p {
     max-width: 600px;
     margin: 20px auto;
-    color: #cbd5e1;
+
+    /* FIX: theme-aware muted text */
+    color: var(--muted-text);
+}
+
+/* ================= BUTTON ================= */
+.hero .btn {
+    display: inline-block;
+    margin-top: 10px;
 }
 
 /* ================= BUTTON ================= */
 .btn {
+    display: inline-block;
     padding: 12px 25px;
+
     background: linear-gradient(90deg, #22c55e, #38bdf8);
     border-radius: 10px;
+
     text-decoration: none;
-    color: black;
-    font-weight: bold;
-    transition: 0.3s;
+    font-weight: 700;
+
+    /* FIX: theme safe text color */
+    color: #0f172a;
+
+    transition: all 0.3s ease;
+
+    /* better interaction feel */
+    position: relative;
+    overflow: hidden;
+
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.25);
 }
 
+/* ================= HOVER ================= */
 .btn:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(56, 189, 248, 0.35);
+}
+
+/* ================= CLICK FEEDBACK ================= */
+.btn:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+/* ================= OPTIONAL SHINE EFFECT ================= */
+.btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.3),
+        transparent
+    );
+
+    transition: 0.5s;
+}
+
+.btn:hover::after {
+    left: 100%;
 }
 
 /* ================= SECTIONS ================= */

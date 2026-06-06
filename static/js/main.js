@@ -1,3 +1,4 @@
+
 /* ================= MENU TOGGLE ================= */
 function toggleMenu() {
     const nav = document.getElementById("navLinks");
@@ -17,26 +18,28 @@ function toggleTheme() {
 }
 
 /* ================= LOAD SAVED THEME ================= */
-window.addEventListener("load", function () {
-    if (localStorage.getItem("theme") === "light") {
+window.addEventListener("DOMContentLoaded", () => {
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "light") {
         document.body.classList.add("light-mode");
     }
 });
 
-/* ================= SCROLL SPY ================= */
-const sections = document.querySelectorAll("section");
-const navLinksSpy = document.querySelectorAll(".nav-link");
-
+/* ================= SCROLL HANDLER (OPTIMIZED) ================= */
 window.addEventListener("scroll", () => {
 
+    /* ===== SCROLL SPY ===== */
+    const sections = document.querySelectorAll("section");
+    const navLinksSpy = document.querySelectorAll(".nav-link");
+
     let current = "";
-    const scrollY = window.scrollY;
 
     sections.forEach(section => {
         const offset = section.offsetTop - 150;
         const height = section.offsetHeight;
 
-        if (scrollY >= offset && scrollY < offset + height) {
+        if (window.scrollY >= offset && window.scrollY < offset + height) {
             current = section.getAttribute("id");
         }
     });
@@ -48,38 +51,69 @@ window.addEventListener("scroll", () => {
             link.classList.add("active");
         }
     });
-});
 
-/* ================= SCROLL PROGRESS BAR ================= */
-window.addEventListener("scroll", () => {
+    /* ===== PROGRESS BAR ===== */
     const bar = document.getElementById("progressBar");
-    if (!bar) return;
 
-    const scrollTop = document.documentElement.scrollTop;
-    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (scrollTop / scrollHeight) * 100;
+    if (bar) {
+        const scrollTop = document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (scrollTop / scrollHeight) * 100;
 
-    bar.style.width = scrolled + "%";
-});
+        bar.style.width = scrolled + "%";
+    }
 
-/* ================= NAVBAR SCROLL EFFECT ================= */
-window.addEventListener("scroll", function () {
+    /* ===== NAVBAR SCROLL EFFECT ===== */
     const navbar = document.getElementById("navbar");
-    if (!navbar) return;
 
-    if (window.scrollY > 50) {
-        navbar.classList.add("scrolled");
-    } else {
-        navbar.classList.remove("scrolled");
+    if (navbar) {
+        if (window.scrollY > 50) {
+            navbar.classList.add("scrolled");
+        } else {
+            navbar.classList.remove("scrolled");
+        }
+    }
+
+    /* ===== HERO SCROLL ANIMATION ===== */
+    const hero = document.querySelector(".hero");
+
+    if (hero) {
+        const rect = hero.getBoundingClientRect();
+        const progress = Math.min(Math.max(-rect.top / window.innerHeight, 0), 1);
+
+        const title = document.querySelector(".hero-title");
+        const subtitle = document.querySelector(".hero-subtitle");
+        const text = document.querySelector(".hero-text");
+        const btn = document.querySelector(".hero-btn");
+
+        if (title) {
+            title.style.transform = `translateY(${progress * -80}px) scale(${1 - progress * 0.15})`;
+            title.style.opacity = 1 - progress;
+        }
+
+        if (subtitle) {
+            subtitle.style.transform = `translateY(${progress * -120}px)`;
+            subtitle.style.opacity = 1 - progress;
+        }
+
+        if (text) {
+            text.style.transform = `translateY(${progress * -150}px)`;
+            text.style.opacity = 1 - progress;
+        }
+
+        if (btn) {
+            btn.style.transform = `translateY(${progress * -180}px)`;
+            btn.style.opacity = 1 - progress;
+        }
     }
 });
 
-/* ================= SCROLL REVEAL ANIMATION ================= */
-const revealElements = document.querySelectorAll(
-    ".reveal, .reveal-left, .reveal-right"
-);
-
+/* ================= SCROLL REVEAL ================= */
 function revealOnScroll() {
+    const revealElements = document.querySelectorAll(
+        ".reveal, .reveal-left, .reveal-right"
+    );
+
     const windowHeight = window.innerHeight;
 
     revealElements.forEach(el => {
@@ -92,7 +126,7 @@ function revealOnScroll() {
 }
 
 window.addEventListener("scroll", revealOnScroll);
-window.addEventListener("load", revealOnScroll);
+window.addEventListener("DOMContentLoaded", revealOnScroll);
 
 /* ================= CONTACT FORM (DJANGO SAFE) ================= */
 const form = document.getElementById("contactForm");
@@ -141,6 +175,8 @@ if (form) {
 window.addEventListener("scroll", () => {
     const navbar = document.querySelector(".navbar");
 
+    if (!navbar) return;
+
     if (window.scrollY > 50) {
         navbar.classList.add("scrolled");
     } else {
@@ -150,21 +186,23 @@ window.addEventListener("scroll", () => {
 
 /* ================= CV MODAL ================= */
 function openCVModal() {
-    document.getElementById("cvModal").style.display = "flex";
+    const modal = document.getElementById("cvModal");
+    if (modal) modal.style.display = "flex";
 }
 
 function closeCVModal() {
-    document.getElementById("cvModal").style.display = "none";
+    const modal = document.getElementById("cvModal");
+    if (modal) modal.style.display = "none";
 }
 
-window.onclick = function (event) {
-    let modal = document.getElementById("cvModal");
-    if (event.target === modal) {
+window.addEventListener("click", function (event) {
+    const modal = document.getElementById("cvModal");
+    if (modal && event.target === modal) {
         modal.style.display = "none";
     }
-};
+});
 
-/* ================= PARTICLE BACKGROUND (FIXED - NO DUPLICATES) ================= */
+/* ================= PARTICLE SYSTEM (SAFE FIXED) ================= */
 const canvas = document.getElementById("particleCanvas");
 
 if (canvas) {
@@ -181,9 +219,13 @@ if (canvas) {
 
     class Particle {
         constructor() {
+            this.reset();
+        }
+
+        reset() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 3;
+            this.size = Math.random() * 2.5;
             this.speedX = Math.random() * 0.5 - 0.25;
             this.speedY = Math.random() * 0.5 - 0.25;
         }
@@ -192,10 +234,10 @@ if (canvas) {
             this.x += this.speedX;
             this.y += this.speedY;
 
-            if (this.x < 0) this.x = canvas.width;
-            if (this.x > canvas.width) this.x = 0;
-            if (this.y < 0) this.y = canvas.height;
-            if (this.y > canvas.height) this.y = 0;
+            if (this.x < 0 || this.x > canvas.width ||
+                this.y < 0 || this.y > canvas.height) {
+                this.reset();
+            }
         }
 
         draw() {

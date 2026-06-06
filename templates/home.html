@@ -3,27 +3,33 @@
 
 {% block content %}
 
-
-
+<!-- ================= HERO ================= -->
 <section id="home" class="hero">
 
-    <div class="hero-content">
+    <div class="hero-content hero-animate">
 
-        <h1>Hi, I'm <span>Kripa Poudel</span></h1>
+        <h1 class="hero-title">
+            Hi, I'm <span>Kripa Poudel</span>
+        </h1>
 
+        <h2 class="hero-subtitle">
+            Cloud & QA Enthusiast
+        </h2>
 
-        <p>
+        <p class="hero-text">
             It's really fun to create new things and watch people enjoying your creations.
         </p>
 
-        <a href="#contact" class="btn">Contact Me</a>
+        <a href="#contact" class="btn hero-btn">
+            Contact Me
+        </a>
 
     </div>
 
 </section>
 
-<!-- ABOUT -->
-<section id="about" class="section">
+<!-- ================= ABOUT ================= -->
+<section id="about" class="section reveal">
 
     <h2>About Me</h2>
 
@@ -34,12 +40,13 @@
 
 </section>
 
-<!-- SKILLS -->
-<section id="skills" class="section">
+<!-- ================= SKILLS ================= -->
+<section id="skills" class="section reveal">
 
     <h2>Skills</h2>
 
     <div class="skills-grid">
+
         <span>Python</span>
         <span>Django</span>
         <span>HTML</span>
@@ -48,12 +55,13 @@
         <span>MySQL</span>
         <span>Cloud</span>
         <span>QA Testing</span>
+
     </div>
 
 </section>
 
-<!-- PROJECTS -->
-<section id="projects" class="section">
+<!-- ================= PROJECTS ================= -->
+<section id="projects" class="section reveal">
 
     <h2>Projects</h2>
 
@@ -73,8 +81,8 @@
 
 </section>
 
-<!-- CONTACT -->
-<section id="contact" class="section">
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="section reveal">
 
     <h2>Contact Me</h2>
 
@@ -86,21 +94,22 @@
         <textarea name="message" placeholder="Your Message" required></textarea>
 
         <button type="submit">Send Message</button>
+
     </form>
 
 </section>
 
-<!-- FOOTER -->
+<!-- ================= FOOTER ================= -->
 <footer>
     <p>© 2026 Kripa Poudel | Built with Django</p>
 </footer>
 
-<!-- WHATSAPP -->
+<!-- ================= WHATSAPP ================= -->
 <a class="whatsapp" href="https://wa.me/9779843677123" target="_blank">
     💬
 </a>
 
-<!-- POPUP -->
+<!-- ================= POPUP ================= -->
 <div id="popup" class="popup" style="display:none;">
     ✅ Message sent successfully!
 </div>
