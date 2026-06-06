@@ -8,7 +8,20 @@ function toggleMenu() {
 /* ================= THEME TOGGLE ================= */
 function toggleTheme() {
     document.body.classList.toggle("light-mode");
+
+    if (document.body.classList.contains("light-mode")) {
+        localStorage.setItem("theme", "light");
+    } else {
+        localStorage.setItem("theme", "dark");
+    }
 }
+
+/* ================= LOAD SAVED THEME ================= */
+window.addEventListener("load", function () {
+    if (localStorage.getItem("theme") === "light") {
+        document.body.classList.add("light-mode");
+    }
+});
 
 /* ================= SCROLL SPY ================= */
 const sections = document.querySelectorAll("section");
@@ -60,55 +73,6 @@ window.addEventListener("scroll", function () {
         navbar.classList.remove("scrolled");
     }
 });
-
-/* ================= PARTICLE BACKGROUND ================= */
-const canvas = document.getElementById("particleCanvas");
-
-if (canvas) {
-
-    const ctx = canvas.getContext("2d");
-
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-
-    let particles = [];
-
-    for (let i = 0; i < 50; i++) {
-        particles.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            dx: (Math.random() - 0.5) * 1,
-            dy: (Math.random() - 0.5) * 1,
-            size: 2
-        });
-    }
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        particles.forEach(p => {
-            p.x += p.dx;
-            p.y += p.dy;
-
-            if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-            if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fillStyle = "rgba(34, 197, 94, 0.5)";
-            ctx.fill();
-        });
-
-        requestAnimationFrame(animate);
-    }
-
-    animate();
-}
 
 /* ================= SCROLL REVEAL ANIMATION ================= */
 const revealElements = document.querySelectorAll(
@@ -175,16 +139,16 @@ if (form) {
 
 /* ================= MOBILE MENU SAFETY ================= */
 window.addEventListener("scroll", () => {
-  const navbar = document.querySelector(".navbar");
+    const navbar = document.querySelector(".navbar");
 
-  if (window.scrollY > 50) {
-    navbar.classList.add("scrolled");
-  } else {
-    navbar.classList.remove("scrolled");
-  }
+    if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+    } else {
+        navbar.classList.remove("scrolled");
+    }
 });
 
-// ================= CV MODAL =================
+/* ================= CV MODAL ================= */
 function openCVModal() {
     document.getElementById("cvModal").style.display = "flex";
 }
@@ -193,76 +157,75 @@ function closeCVModal() {
     document.getElementById("cvModal").style.display = "none";
 }
 
-// close when clicking outside modal
-window.onclick = function(event) {
+window.onclick = function (event) {
     let modal = document.getElementById("cvModal");
     if (event.target === modal) {
         modal.style.display = "none";
     }
-}
+};
 
-// ================= FLOATING DOTS =================
+/* ================= PARTICLE BACKGROUND (FIXED - NO DUPLICATES) ================= */
 const canvas = document.getElementById("particleCanvas");
-const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+if (canvas) {
 
-let particlesArray = [];
+    const ctx = canvas.getContext("2d");
 
-class Particle {
-    constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3;
-        this.speedX = Math.random() * 0.5 - 0.25;
-        this.speedY = Math.random() * 0.5 - 0.25;
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
     }
 
-    update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
 
-        if (this.x < 0) this.x = canvas.width;
-        if (this.x > canvas.width) this.x = 0;
-        if (this.y < 0) this.y = canvas.height;
-        if (this.y > canvas.height) this.y = 0;
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 3;
+            this.speedX = Math.random() * 0.5 - 0.25;
+            this.speedY = Math.random() * 0.5 - 0.25;
+        }
+
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+
+            if (this.x < 0) this.x = canvas.width;
+            if (this.x > canvas.width) this.x = 0;
+            if (this.y < 0) this.y = canvas.height;
+            if (this.y > canvas.height) this.y = 0;
+        }
+
+        draw() {
+            ctx.fillStyle = "rgba(56, 189, 248, 0.6)";
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
     }
 
-    draw() {
-        ctx.fillStyle = "rgba(56, 189, 248, 0.6)";
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-    }
-}
+    let particles = [];
 
-function initParticles() {
-    particlesArray = [];
-    let numberOfParticles = 80;
-
-    for (let i = 0; i < numberOfParticles; i++) {
-        particlesArray.push(new Particle());
-    }
-}
-
-function animateParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
-        particlesArray[i].draw();
+    function initParticles() {
+        particles = [];
+        for (let i = 0; i < 80; i++) {
+            particles.push(new Particle());
+        }
     }
 
-    requestAnimationFrame(animateParticles);
-}
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-initParticles();
-animateParticles();
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
 
-// resize fix
-window.addEventListener("resize", function () {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+        requestAnimationFrame(animate);
+    }
+
     initParticles();
-});
+    animate();
+}
