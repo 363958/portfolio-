@@ -8,14 +8,25 @@
 
 :root {
     --navbar-height: 90px;
+    --bg-color: #0f172a;
+    --text-color: #ffffff;
+
+    --muted-text: #cbd5e1;
+
+    --card-bg: #1e293b;
+
+    --navbar-bg: rgba(15, 23, 42, 0.45);
+    --navbar-border: rgba(255,255,255,0.08);
 }
 
-body {
+   body {
     padding-top: var(--navbar-height);
-    background: #0f172a;
-    color: white;
+    background: var(--bg-color);
+    color: var(--text-color);
     line-height: 1.6;
     overflow-x: hidden;
+
+    transition: background 0.4s ease, color 0.4s ease;
 }
 
 /* ================= PARTICLES ================= */
@@ -53,19 +64,19 @@ body {
     align-items: center;
     justify-content: space-between;
 
-    background: rgba(15, 23, 42, 0.45);
-    backdrop-filter: blur(25px);
+background: var(--navbar-bg);
+    border: 1px solid var(--navbar-border);
+    backdrop-filter: blur(25px);    backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
     transition: all 0.3s ease;
 
     border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.08);
-
     z-index: 1000;
 }
 
 .navbar.scrolled {
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--navbar-bg);
+  border: 1px solid var(--navbar-border);
   backdrop-filter: blur(20px);
 }
 
@@ -193,6 +204,7 @@ body {
     align-items: center;
     text-align: center;
     padding: 0 20px;
+     color: var(--muted-text);
 }
 
 .hero h1 {
@@ -267,7 +279,8 @@ body {
 }
 
 .project-card {
-    background: #1e293b;
+  background: var(--card-bg);
+    color: var(--text-color);
     padding: 20px;
     width: 300px;
     border-radius: 12px;
@@ -356,26 +369,22 @@ footer {
 }
 
 /* ================= LIGHT MODE ================= */
-body.light-mode .nav-links li a {
-    color: #0f172a;
+body.light-mode {
+    --bg-color: #f1f5f9;
+    --text-color: #0f172a;
+
+    --muted-text: #334155;
+
+    --card-bg: #ffffff;
+
+    --navbar-bg: rgba(255,255,255,0.85);
+    --navbar-border: rgba(0,0,0,0.08);
 }
 
-body.light-mode .nav-links li a:hover {
-    background: rgba(56, 189, 248, 0.15);
-}
 
-body.light-mode .theme-btn {
-    background: rgba(0,0,0,0.05);
-    color: #0f172a;
-}
 
-body.light-mode .cv-btn {
-    color: white;
-}
 
-body.light-mode .skills-grid span {
-    background: #e2e8f0;
-}
+
 @media (min-width: 769px) {
 
     .menu-toggle {
@@ -412,8 +421,8 @@ body.light-mode .skills-grid span {
     width: 80%;
     height: 85%;
 
-    background: #0f172a;
-    border-radius: 12px;
+  background: var(--card-bg);
+    color: var(--text-color);    border-radius: 12px;
 
     position: relative;
     overflow: hidden;
