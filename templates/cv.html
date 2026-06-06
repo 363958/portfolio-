@@ -1,0 +1,71 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My CV</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            background: #0f172a;
+            font-family: Arial, sans-serif;
+        }
+
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+
+            padding: 12px 20px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            z-index: 1000;
+        }
+
+        .back-btn {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            background: #22c55e;
+            padding: 8px 14px;
+            border-radius: 8px;
+        }
+
+        .viewer {
+            overflow: hidden;
+            margin-top: 60px;
+            height: calc(100vh - 60px);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="top-bar">
+    <div style="color:white;">My CV</div>
+
+    <a href="/" class="back-btn">← Back</a>
+</div>
+
+<div class="viewer">
+    <iframe src="{% static 'cv.pdf' %}"></iframe>
+</div>
+
+</body>
+</html>

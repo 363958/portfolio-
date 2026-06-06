@@ -58,8 +58,8 @@
         </li>
 
         <li>
-            <a href="{% static 'cv.pdf' %}" download class="cv-btn">
-                CV
+    <a href="{% url 'cv' %}" class="cv-btn">
+        View CV
             </a>
         </li>
 
@@ -73,6 +73,20 @@
 
 <!-- JS -->
 <script src="{% static 'js/main.js' %}"></script>
+<!-- CV MODAL -->
+<div id="cvModal" class="cv-modal">
 
+    <div class="cv-modal-content">
+
+        <span class="cv-close" onclick="closeCVModal()">&times;</span>
+
+        <iframe 
+            src="{% static 'cv.pdf' %}" 
+            class="cv-frame">
+        </iframe>
+
+    </div>
+
+</div>
 </body>
 </html>

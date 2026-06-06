@@ -183,3 +183,21 @@ window.addEventListener("scroll", () => {
     navbar.classList.remove("scrolled");
   }
 });
+
+// ================= CV MODAL =================
+function openCVModal() {
+    document.getElementById("cvModal").style.display = "flex";
+}
+
+function closeCVModal() {
+    document.getElementById("cvModal").style.display = "none";
+}
+
+// close when clicking outside modal
+window.onclick = function(event) {
+    let modal = document.getElementById("cvModal");
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+}
+
