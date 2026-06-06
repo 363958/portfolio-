@@ -5,19 +5,18 @@ function toggleMenu() {
     nav.classList.toggle("active");
 }
 
-/* ================= DARK MODE ================= */
+/* ================= THEME TOGGLE ================= */
 function toggleTheme() {
     document.body.classList.toggle("light-mode");
 }
 
-/* ================= SCROLL SPY (OPTIMIZED) ================= */
+/* ================= SCROLL SPY ================= */
 const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll(".nav-link");
+const navLinksSpy = document.querySelectorAll(".nav-link");
 
 window.addEventListener("scroll", () => {
 
     let current = "";
-
     const scrollY = window.scrollY;
 
     sections.forEach(section => {
@@ -29,7 +28,7 @@ window.addEventListener("scroll", () => {
         }
     });
 
-    navLinks.forEach(link => {
+    navLinksSpy.forEach(link => {
         link.classList.remove("active");
 
         if (current && link.getAttribute("href") === "#" + current) {
@@ -38,14 +37,36 @@ window.addEventListener("scroll", () => {
     });
 });
 
-/* ================= PARTICLE BACKGROUND (SAFE + STABLE) ================= */
+/* ================= SCROLL PROGRESS BAR ================= */
+window.addEventListener("scroll", () => {
+    const bar = document.getElementById("progressBar");
+    if (!bar) return;
+
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (scrollTop / scrollHeight) * 100;
+
+    bar.style.width = scrolled + "%";
+});
+
+/* ================= NAVBAR SCROLL EFFECT ================= */
+window.addEventListener("scroll", function () {
+    const navbar = document.getElementById("navbar");
+    if (!navbar) return;
+
+    if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+    } else {
+        navbar.classList.remove("scrolled");
+    }
+});
+
+/* ================= PARTICLE BACKGROUND ================= */
 const canvas = document.getElementById("particleCanvas");
-let ctx;
-let particles = [];
 
 if (canvas) {
 
-    ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d");
 
     function resizeCanvas() {
         canvas.width = window.innerWidth;
@@ -55,11 +76,12 @@ if (canvas) {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    // Create particles
-    for (let i = 0; i < 60; i++) {
+    let particles = [];
+
+    for (let i = 0; i < 50; i++) {
         particles.push({
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
             dx: (Math.random() - 0.5) * 1,
             dy: (Math.random() - 0.5) * 1,
             size: 2
@@ -88,7 +110,7 @@ if (canvas) {
     animate();
 }
 
-/* ================= SCROLL ANIMATION ================= */
+/* ================= SCROLL REVEAL ANIMATION ================= */
 const revealElements = document.querySelectorAll(
     ".reveal, .reveal-left, .reveal-right"
 );
@@ -108,7 +130,7 @@ function revealOnScroll() {
 window.addEventListener("scroll", revealOnScroll);
 window.addEventListener("load", revealOnScroll);
 
-/* ================= CONTACT FORM (AJAX + POPUP FIXED) ================= */
+/* ================= CONTACT FORM (DJANGO SAFE) ================= */
 const form = document.getElementById("contactForm");
 const popup = document.getElementById("popup");
 
@@ -120,7 +142,7 @@ if (form) {
         const formData = new FormData(form);
 
         try {
-            const response = await fetch("/", {
+            const response = await fetch(window.location.pathname, {
                 method: "POST",
                 body: formData,
                 headers: {
@@ -142,25 +164,13 @@ if (form) {
 
                 form.reset();
             } else {
-                console.log("Server returned error:", data);
+                console.log("Server error:", data);
             }
 
         } catch (error) {
-            console.log("AJAX Error:", error);
+            console.log("AJAX error:", error);
         }
     });
 }
 
-/* ================= NAVBAR SCROLL EFFECT (FIXED ONLY) ================= */
-window.addEventListener("scroll", () => {
-
-    const navbar = document.querySelector(".navbar");
-
-    if (!navbar) return;   // ✅ safe check added
-
-    if (window.scrollY > 50) {
-        navbar.classList.add("scrolled");
-    } else {
-        navbar.classList.remove("scrolled");
-    }
-});
+/* ================= MOBILE MENU SAFETY ================= */

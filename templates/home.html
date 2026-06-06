@@ -4,13 +4,12 @@
 {% block content %}
 
 <!-- HERO -->
-<section id="home" class="hero reveal">
+<section id="home" class="hero">
 
     <div class="hero-content">
 
         <h1>Hi, I'm <span>Kripa Poudel</span></h1>
 
-        <!-- FIXED: not empty -->
         <h2>Cloud & QA Enthusiast</h2>
 
         <p>
@@ -25,7 +24,7 @@
 </section>
 
 <!-- ABOUT -->
-<section id="about" class="section reveal-left">
+<section id="about" class="section">
 
     <h2>About Me</h2>
 
@@ -37,7 +36,7 @@
 </section>
 
 <!-- SKILLS -->
-<section id="skills" class="section skills reveal">
+<section id="skills" class="section">
 
     <h2>Skills</h2>
 
@@ -55,7 +54,7 @@
 </section>
 
 <!-- PROJECTS -->
-<section id="projects" class="section projects reveal-right">
+<section id="projects" class="section">
 
     <h2>Projects</h2>
 
@@ -76,28 +75,25 @@
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="section contact reveal">
+<section id="contact" class="section">
 
     <h2>Contact Me</h2>
 
-    <form class="contactForm" method="POST">
-    {% csrf_token %}
+    <form id="contactForm" class="contact-form" method="POST">
+        {% csrf_token %}
 
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <textarea name="message" placeholder="Your Message" required></textarea>
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" required></textarea>
 
-    <button type="submit">Send Message</button>
-</form>
+        <button type="submit">Send Message</button>
+    </form>
 
 </section>
 
-
 <!-- FOOTER -->
-<footer class="reveal">
-
+<footer>
     <p>© 2026 Kripa Poudel | Built with Django</p>
-
 </footer>
 
 <!-- WHATSAPP -->
@@ -105,11 +101,9 @@
     💬
 </a>
 
-
-
-<div id="popup" class="popup">
+<!-- POPUP -->
+<div id="popup" class="popup" style="display:none;">
     ✅ Message sent successfully!
 </div>
-
 
 {% endblock %}
