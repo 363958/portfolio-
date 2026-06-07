@@ -1,9 +1,5 @@
-{% extends 'base.html' %}
-{% load static %}
-
 {% block content %}
 
-<!-- ================= HERO ================= -->
 <section id="home" class="hero">
 
     <div class="hero-content hero-animate">
@@ -13,105 +9,42 @@
         </h1>
 
         <h2 class="hero-subtitle">
-            Desgine and thrive
+            Design and Thrive
         </h2>
 
         <p class="hero-text">
-            It's really fun to create new things and watch people enjoying your creations.
+            I am a passionate and creative individual who enjoys building meaningful digital experiences.
+            I focus on turning ideas into simple, clean, and user-friendly solutions while continuously learning and improving my skills.
+            This portfolio represents my journey, growth, and the work I am proud of.
         </p>
 
-        <a href="#contact" class="btn hero-btn">
-            Contact Me
-        </a>
-
-    </div>
-
-</section>
-
-<!-- ================= ABOUT ================= -->
-<section id="about" class="section reveal">
-
-    <h2>About Me</h2>
-
-    <p>
-        Welcome to my portfolio. I am passionate about creating meaningful work, learning new skills, and turning ideas into reality. This portfolio showcases my projects, experiences, and achievements, reflecting my dedication to growth, creativity, and continuous improvement.
-        Thank you for visiting.
-    </p>
-
-</section>
-
-<!-- ================= SKILLS ================= -->
-<section id="skills" class="section reveal">
-
-    <h2>Skills</h2>
-
-    <div class="skills-grid">
-
-        <span>Python</span>
-        <span>Django</span>
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>JavaScript</span>
-        <span>MySQL</span>
-        <span>Canva</span>
-        <span>FIgma</span>
-
-    </div>
-
-</section>
-
-<!-- ================= PROJECTS ================= -->
-<section id="projects" class="section reveal">
-
-    <h2>Projects</h2>
-
-    <div class="project-grid">
-
-        <div class="project-card">
-            <h3>Blood Donation System</h3>
-            <p>Django-based blood bank management system.</p>
+        <div class="hero-skills">
+            <span>Python</span>
+            <span>Django</span>
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+            <span>MySQL</span>
+            <span>Canva</span>
+            <span>Figma</span>
         </div>
 
-        <div class="project-card">
-            <h3>Service Marketplace</h3>
-            <p>React Native + Django platform.</p>
+        <div class="hero-buttons">
+            <a href="mailto:your@email.com" class="btn hero-btn">
+                Contact Me
+            </a>
         </div>
 
     </div>
 
 </section>
 
-<!-- ================= CONTACT ================= -->
-<section id="contact" class="section reveal">
-
-    <h2>Contact Me</h2>
-
-    <form id="contactForm" class="contact-form" method="POST">
-        {% csrf_token %}
-
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <textarea name="message" placeholder="Your Message" required></textarea>
-
-        <button type="submit">Send Message</button>
-
-    </form>
-
-</section>
-
-<!-- ================= FOOTER ================= -->
 <footer>
     <p>© 2026 Kripa Poudel | Built with Django</p>
 </footer>
 
-<!-- ================= WHATSAPP ================= -->
 <a class="whatsapp" href="https://wa.me/9779843677123" target="_blank">
     💬
 </a>
-
-<!-- ================= POPUP ================= -->
-<div id="popup" class="popup" style="display:none;">
-    ✅ Message sent successfully!
-</div>
 
 {% endblock %}
