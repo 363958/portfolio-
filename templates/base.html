@@ -58,7 +58,7 @@
         </li>
 
         <li>
-    <a href="{% url 'cv' %}" class="cv-btn">
+<a href="{% static 'cv/resume.pdf' %}" target="_blank" class="cv-btn">
         View CV
             </a>
         </li>
@@ -81,7 +81,7 @@
         <span class="cv-close" onclick="closeCVModal()">&times;</span>
 
         <iframe 
-            src="{% static 'cv.pdf' %}" 
+            src="{% static 'cv/mycv.pdf' %}" 
             class="cv-frame">
         </iframe>
 
